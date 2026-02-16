@@ -1,16 +1,90 @@
-# React + Vite
+# 🧩 Admin Dashboard (SaaS Style)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern role-based admin dashboard built with **React, Clerk, Firebase, and Tailwind**.
+This project simulates a real production SaaS workspace with authentication, team management, and project tracking.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+* 🔐 Authentication with Clerk
+* 👥 Invite team members via email
+* 🏢 Organization-based workspace
+* 🛡 Role-based access control (Admin / Member)
+* 📁 Project & task management
+* 👤 Members page with role change + remove
+* 🌙 Light / Dark mode
+* 🔄 Real-time Firestore sync
+* 📊 Clean dashboard UI
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧱 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **React + Vite**
+* **Clerk Authentication**
+* **Firebase Firestore**
+* **Tailwind CSS**
+* **React Router**
+* **Context API**
+
+---
+
+ 
+
+## 🔑 Roles
+
+### Admin
+
+* Invite members
+* Remove members
+* Change roles
+* Access billing
+
+### Member
+
+* View projects
+* Manage tasks
+* No admin access
+
+---
+
+## 📨 Invite Flow
+
+1. Admin sends invite
+2. User accepts email
+3. Account created with Clerk
+4. User joins organization
+5. User synced to Firestore
+6. Appears in Members page
+
+---
+ 
+
+## 📸 Screens
+
+* Dashboard
+* Projects
+* Tasks
+* Members
+* Invite system
+
+---
+
+## 🎯 Purpose
+
+This project demonstrates a **real-world frontend architecture** with:
+
+* Authentication
+* RBAC
+* Multi-user system
+* SaaS dashboard UI
+
+Built as a portfolio project to showcase production-ready frontend skills.
+
+---
+
+## 👨‍💻 Author
+
+Chandru
+Frontend Developer
