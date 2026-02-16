@@ -6,9 +6,9 @@ import MemTable from "../components/MemTable";
 import { MemTableProvider } from "../../context/MemTableContext";
 
 const priorityColors = {
-  HIGH: "bg-red-100 text-red-700",
-  MEDIUM: "bg-blue-100 text-blue-700",
-  LOW: "bg-gray-100 text-gray-600",
+  HIGH: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  MEDIUM: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  LOW: "bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-gray-300",
 };
 
 const ProjectDetailsPage = () => {
@@ -16,15 +16,15 @@ const ProjectDetailsPage = () => {
   const { id } = useParams();
   const { projects, updateProjectStatus } = useContext(ProjectContext);
 
- if (!projects || projects.length === 0) {
-  return <div className="p-6">Loading project...</div>;
-}
+  if (!projects || projects.length === 0) {
+    return <div className="p-6">Loading project...</div>;
+  }
 
-const project = projects.find((p) => String(p.id) === String(id));
+  const project = projects.find((p) => String(p.id) === String(id));
 
-if (!project) {
-  return <div className="p-6">Loading project...</div>;
-}
+  if (!project) {
+    return <div className="p-6">Loading project...</div>;
+  }
 
 
   return (
@@ -33,8 +33,9 @@ if (!project) {
       {/* BACK */}
       <div
         onClick={() => navigate(-1)}
-        className="flex items-center gap-2 cursor-pointer text-gray-700"
+        className="flex items-center gap-2 cursor-pointer text-gray-700 dark:text-gray-300"
       >
+
         <FaArrowLeft />
         <span className="text-lg font-semibold">Back</span>
       </div>
@@ -123,7 +124,7 @@ if (!project) {
 
             <div>
               <select
-                className="border rounded px-3 py-1 text-sm"
+                className="border border-gray-300 dark:border-zinc-700 rounded px-3 py-1 text-sm bg-white dark:bg-white-900"
                 value={project.status}
                 onChange={(e) =>
                   updateProjectStatus(project.id, e.target.value)
@@ -153,8 +154,8 @@ if (!project) {
 };
 
 const Row = ({ label, value }) => (
-  <div className="flex justify-between border-b pb-2">
-    <span className="text-gray-500">{label}</span>
+  <div className="flex justify-between border-b border-gray-200 dark:border-zinc-800 pb-2">
+    <span className="text-white-500 dark:text-gray-400">{label}</span>
     <span className="font-medium">{value}</span>
   </div>
 );

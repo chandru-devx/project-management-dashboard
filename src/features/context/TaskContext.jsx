@@ -1,65 +1,66 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { collection, addDoc, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
-// import { useAuth } from "../../app/providers/AuthProvider";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useOrganization } from "@clerk/clerk-react";
+import toast from "react-hot-toast";
 
 export const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
-  const { user } = useUser();
+
+  const { organization } = useOrganization();
+
   const [tasks, setTasks] = useState([]);
 
-  // 🔹 Fetch tasks from Firestore
+  // FETCH TASKS
   useEffect(() => {
-    if (!user?.organizationId) return;
+    if (!organization?.id) return;
 
     const fetchTasks = async () => {
-      try {
-        const q = query(
-          collection(db, "tasks"),
-          where("organizationId", "==", user.organizationId)
-        );
+      const q = query(
+        collection(db, "tasks"),
+        where("organizationId", "==", organization.id)
+      );
 
-        const querySnapshot = await getDocs(q);
+      const snap = await getDocs(q);
 
-        const taskList = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+      const list = snap.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
 
-        setTasks(taskList);
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
+      setTasks(list);
     };
 
     fetchTasks();
-  }, [user]);
+  }, [organization]);
 
-  // 🔹 Add Task
+  // ADD TASK
   const addTask = async (task) => {
+    if (!organization?.id) {
+      console.error("No organization");
+      return;
+    }
+
     try {
       const docRef = await addDoc(collection(db, "tasks"), {
         ...task,
-        organizationId: user.organizationId,
+        organizationId: organization.id, // ✅ FIX
         createdAt: new Date(),
       });
 
       setTasks(prev => [...prev, { id: docRef.id, ...task }]);
+      toast.success("Task-Added")
     } catch (error) {
       console.error("Add error:", error);
     }
   };
 
-  // 🔹 Delete Task
+  // DELETE TASK
   const deleteTask = async (id) => {
-    try {
-      await deleteDoc(doc(db, "tasks", id));
-      setTasks(prev => prev.filter(task => task.id !== id));
-    } catch (error) {
-      console.error("Delete error:", error);
-    }
+    await deleteDoc(doc(db, "tasks", id));
+    setTasks(prev => prev.filter(t => t.id !== id));
+    toast.error("Task-deleted")
   };
 
   return (

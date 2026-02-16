@@ -1,31 +1,38 @@
 import { useEffect } from "react";
 import { useUser, useOrganization } from "@clerk/clerk-react";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 const ClerkSyncProvider = ({ children }) => {
-  const { user } = useUser();
-  const { organization } = useOrganization();
+  const { user, isLoaded } = useUser();
+  const { organization, membership } = useOrganization();
 
   useEffect(() => {
+    if (!isLoaded) return;
     if (!user) return;
+    if (!organization) return;
 
-    const sync = async () => {
+    const syncUser = async () => {
       const ref = doc(db, "users", user.id);
       const snap = await getDoc(ref);
 
-      if (!snap.exists()) {
-        await setDoc(ref, {
-          email: user.primaryEmailAddress?.emailAddress,
-          role: organization?.membership?.role === "org:admin" ? "admin" : "member",
-          organizationId: organization?.id || null,
-          createdAt: new Date(),
-        });
-      }
+      // If user already stored → stop
+      if (snap.exists()) return;
+
+      await setDoc(ref, {
+        id: user.id,
+        email: user.primaryEmailAddress?.emailAddress,
+        name: user.fullName,
+        role: membership?.role === "org:admin" ? "admin" : "member",
+        organizationId: organization.id,
+        createdAt: new Date(),
+      });
+
+      console.log("User synced to Firestore");
     };
 
-    sync();
-  }, [user, organization]);
+    syncUser();
+  }, [user, isLoaded, organization, membership]);
 
   return children;
 };

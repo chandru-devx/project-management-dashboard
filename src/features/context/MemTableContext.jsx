@@ -9,15 +9,17 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
-export const MemTableContext = createContext();
+export const MemTableContext = createContext(null);
 
 export const MemTableProvider = ({ children }) => {
   const [memTable, setMemTable] = useState([]);
 
   // 🔥 REALTIME FETCH
   useEffect(() => {
+    const colRef = collection(db, "members");
+
     const unsubscribe = onSnapshot(
-      collection(db, "members"), // collection name
+      colRef,
       (snap) => {
         const data = snap.docs.map((d) => ({
           id: d.id,
@@ -25,10 +27,10 @@ export const MemTableProvider = ({ children }) => {
         }));
         setMemTable(data);
       },
-      (err) => console.error(err)
+      (err) => console.error("Snapshot error:", err)
     );
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
   // 🔥 ADD

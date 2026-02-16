@@ -4,7 +4,7 @@ import { getDocs } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import { useUser } from "@clerk/clerk-react";
-// import { useAuth } from "../../app/providers/AuthProvider";
+import toast from "react-hot-toast";
 
 
 export const ProjectContext = createContext();
@@ -13,6 +13,7 @@ export const ProjectProvider = ({ children }) => {
 
     // store LIST of projects
     const [projects, setProjects] = useState([]);
+    
     const { user, isLoaded } = useUser();
 
     useEffect(() => {
@@ -80,6 +81,7 @@ export const ProjectProvider = ({ children }) => {
 
 
             console.log("Saved ID:", docRef.id);
+            toast.success("Project-Added")
 
         } catch (error) {
             console.error("Add error:", error);
@@ -90,6 +92,7 @@ export const ProjectProvider = ({ children }) => {
     // delete project
     const deleteProject = (id) => {
         setProjects((prev) => prev.filter((p) => p.id !== id));
+        
     };
 
     // update project
