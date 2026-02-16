@@ -5,9 +5,9 @@ export default function SettingsPage() {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   const [form, setForm] = useState({
-    name: "Chandru",
-    email: "chandru@mail.com",
-    company: "Admin Dashboard",
+    name: "",
+    email: "",
+    company: "",
     theme: "light",
     notifications: true,
   });
