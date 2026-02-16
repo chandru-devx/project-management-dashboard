@@ -47,13 +47,11 @@ const SideBar = ({ collapsed }) => {
        
 
         <MenuItem
-          icon={<FaLayerGroup size={18} />}
-          component={<Link to="/dashboard" />}
-          style={menuItemStyle("/dashboard")}
+          icon={<FaLayerGroup size={18} />}       
           rootStyles={hoverStyle}
           className="font-semibold tracking-wide"
         >
-          WorkPilot
+          Task Force
         </MenuItem>
 
         <MenuItem

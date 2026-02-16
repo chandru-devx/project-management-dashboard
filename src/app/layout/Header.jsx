@@ -35,23 +35,8 @@ const Header = ({ toggleSidebar }) => {
         <h3>Dashboard</h3>
       </div>
 
-      {/* SEARCH */}
-      <div
-        className="hidden md:flex items-center px-3 py-1.5 rounded-lg w-[300px]"
-        style={{
-          background: isDark ? "#1f2937" : "#f3f4f6",
-        }}
-      >
-        <FaSearch />
-        <input
-          type="text"
-          placeholder="Search..."
-          className="bg-transparent outline-none ml-2 w-full"
-          style={{
-            color: isDark ? "white" : "#111827",
-          }}
-        />
-      </div>
+     
+      
 
       {/* RIGHT */}
       <div>

@@ -25,10 +25,10 @@ const MembersPage = () => {
     };
 
     return (
-        <div className="max-w-5xl mx-auto">
+        <div className="w-full p-6">
             <h1 className="text-2xl font-semibold mb-6">Team Members</h1>
 
-            <div className="bg-white border rounded-xl overflow-hidden shadow-sm">
+            <div className="bg-white border rounded-xl overflow-hidden shadow-sm ">
                 <table className="w-full text-sm">
                     <thead className="bg-gray-50 text-gray-600 text-xs uppercase bg-white dark:bg-zinc-900 border dark:border-zinc-700">
                         <tr>
