@@ -20,10 +20,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
       <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-
         <ClerkSyncProvider>
           <MembersProvider>
-
             <OrgActiveProvider>
               <App />
               <Toaster
@@ -36,10 +34,7 @@ createRoot(document.getElementById('root')).render(
                   },
                 }}
               />
-
             </OrgActiveProvider>
-
-
           </MembersProvider>
         </ClerkSyncProvider>
       </ClerkProvider>

@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
-import { getDocs } from "firebase/firestore";
+ 
 import { createContext, useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import { useUser } from "@clerk/clerk-react";

@@ -3,7 +3,7 @@ import { FaPlus, FaSearch, FaFolderOpen } from "react-icons/fa";
 import ProjectForm from "../components/ProjectForm";
 import ProjectCard from "../components/ProjectCard";
 import { ProjectContext } from "../../context/ProjectContext";
-import toast from "react-hot-toast";
+ 
 
 export default function ProjectsPage() {
   const { projects } = useContext(ProjectContext);

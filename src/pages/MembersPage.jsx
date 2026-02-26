@@ -46,14 +46,14 @@ const MembersPage = () => {
                                 <td className="px-6 py-4">{m.email}</td>
 
                                 <td className="px-6 py-4">
-                                    <select
-                                        value={m.role}
-                                        onChange={(e) => changeRole(m.id, e.target.value)}
-                                        className="border rounded px-2 py-1 text-sm"
+                                    <span
+                                        className={`px-2 py-1 rounded text-xs font-medium
+                                                   ${m.role === "admin"
+                                                ? "bg-blue-100 text-blue-700"
+                                                : "bg-gray-100 text-gray-700"}`}
                                     >
-                                        <option value="admin">admin</option>
-                                        <option value="member">member</option>
-                                    </select>
+                                        {m.role}
+                                    </span>
                                 </td>
 
                                 <td className="px-6 py-4 text-right">
