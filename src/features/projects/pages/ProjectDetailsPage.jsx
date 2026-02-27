@@ -53,11 +53,10 @@ const ProjectDetailsPage = () => {
           <div>START</div>
           <div>DUE</div>
         </div>
-
-        {/* ROW */}
+ 
         <div className="px-4 py-4">
 
-          {/* MOBILE VIEW */}
+           
           <div className="md:hidden space-y-3 text-sm">
             <Row label="Title" value={project.name} />
             <Row label="Type" value="Project" />

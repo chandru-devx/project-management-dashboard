@@ -38,10 +38,6 @@ export const ProjectProvider = ({ children }) => {
 
 
 
-
-
-
-
     const updateProjectStatus = async (id, newStatus) => {
         try {
             // update in firebase
